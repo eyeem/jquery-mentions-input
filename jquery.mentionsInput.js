@@ -205,7 +205,7 @@
       updateMentionsCollection();
       hideAutoComplete();
 
-      var triggerCharIndex = _.lastIndexOf(inputBuffer, settings.triggerChar);
+      var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
       if (triggerCharIndex > -1) {
         currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
         currentDataQuery = utils.rtrim(currentDataQuery);
