@@ -203,7 +203,7 @@
     function onInputBoxInput(e) {
       updateValues();
       updateMentionsCollection();
-      hideAutoComplete();
+      //hideAutoComplete();
 
       var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
       if (triggerCharIndex > -1) {
