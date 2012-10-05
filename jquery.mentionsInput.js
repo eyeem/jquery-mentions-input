@@ -107,6 +107,7 @@
     function initMentionsOverlay() {
       elmMentionsOverlay = $(settings.templates.mentionsOverlay());
       elmMentionsOverlay.prependTo(elmWrapperBox);
+      
     }
 
     function updateValues() {
@@ -317,6 +318,7 @@
         var elmListItem = $(settings.templates.autocompleteListItem({
           'id'      : utils.htmlEncode(item.id),
           'display' : utils.htmlEncode(item.name),
+          'fullname' : utils.htmlEncode(item.fullname),
           'type'    : utils.htmlEncode(item.type),
           'content' : utils.highlightTerm(utils.htmlEncode((item.name)), query)
         })).attr('data-uid', itemUid);
