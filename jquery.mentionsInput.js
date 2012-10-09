@@ -15,6 +15,7 @@
   var defaultSettings = {
     triggerChar   : '@',
     onDataRequest : $.noop,
+    onEmptyRequest : $.noop,
     minChars      : 2,
     showAvatars   : true,
     elastic       : true,
@@ -347,6 +348,10 @@
     function doSearch(query) {
       if (query && query.length && query.length >= settings.minChars) {
         settings.onDataRequest.call(this, 'search', query, function (responseData) {
+          populateDropdown(query, responseData);
+        });
+      } else {
+        settings.onEmptyRequest.call(this, 'search', query, function (responseData) {
           populateDropdown(query, responseData);
         });
       }
