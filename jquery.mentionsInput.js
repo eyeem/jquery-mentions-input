@@ -208,11 +208,14 @@
       //hideAutoComplete();
 
       var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
-      if (triggerCharIndex > -1) {
+      if (triggerCharIndex > -1) {        
         currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
-        currentDataQuery = utils.rtrim(currentDataQuery);
-
-        _.defer(_.bind(doSearch, this, currentDataQuery));
+        if(currentDataQuery.lastIndexOf(' ') != -1){
+          hideAutoComplete();
+        } else {
+          currentDataQuery = utils.rtrim(currentDataQuery);
+          _.defer(_.bind(doSearch, this, currentDataQuery));
+        }
       }
     }
 
