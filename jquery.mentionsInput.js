@@ -216,6 +216,8 @@
           currentDataQuery = utils.rtrim(currentDataQuery);
           _.defer(_.bind(doSearch, this, currentDataQuery));
         }
+      } else {
+        hideAutoComplete();
       }
     }
 
