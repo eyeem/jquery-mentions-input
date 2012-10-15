@@ -214,7 +214,9 @@
           hideAutoComplete();
         } else {
           currentDataQuery = utils.rtrim(currentDataQuery);
-          _.defer(_.bind(doSearch, this, currentDataQuery));
+          if(triggerCharIndex == 0 || $('.viewport.active #comment-form_comment').val().charAt(triggerCharIndex - 1) == " " ){
+            _.defer(_.bind(doSearch, this, currentDataQuery));          
+          }        
         }
       } else {
         hideAutoComplete();
