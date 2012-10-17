@@ -150,19 +150,30 @@
     }
 
     function addMention(mention) {
-
+      //console.log('addMention in');
       var currentMessage = getInputBoxValue();
+      
+      //console.log('currentMessage = '+currentMessage);
 
       // Using a regex to figure out positions
       var regex = new RegExp("\\" + settings.triggerChar + currentDataQuery, "gi");
       regex.exec(currentMessage);
+      
+      //console.log(regex);
 
       var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
+      //console.log('regex.lastIndex = '+regex.lastIndex);
+      //console.log('currentDataQuery.length = '+currentDataQuery.length);
+      //console.log('startCaretPosition = '+startCaretPosition);
       var currentCaretPosition = regex.lastIndex;
+      //console.log('currentCaretPosition = '+currentCaretPosition);
 
       var start = currentMessage.substr(0, startCaretPosition);
+      //console.log('start = '+start);
       var end = currentMessage.substr(currentCaretPosition, currentMessage.length);
+      //console.log('end = '+end);
       var startEndIndex = (start + mention.value).length + 1;
+      //console.log('startEndIndex = '+startEndIndex);
 
       mentionsCollection.push(mention);
 
