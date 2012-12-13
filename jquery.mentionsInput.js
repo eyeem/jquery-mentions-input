@@ -157,22 +157,40 @@
 
       // Using a regex to figure out positions
       var regex = new RegExp("\\" + settings.triggerChar + currentDataQuery, "gi");
-      regex.exec(currentMessage);
+      regex.exec(currentMessage);      
       
-      //console.log(regex);
+      var index = regex.lastIndex;
+      while(regex.test(currentMessage)){
+        index = regex.lastIndex;
+      }
+      
+      //console.log('regex  :' +regex);
+      //console.log('index  :' +index);
 
       var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
+      startCaretPosition = index - currentDataQuery.length - 1;
+
+      
+      //startCaretPosition = inputBuffer.lastIndexOf(settings.triggerChar);
       //console.log('regex.lastIndex = '+regex.lastIndex);
       //console.log('currentDataQuery.length = '+currentDataQuery.length);
       //console.log('startCaretPosition = '+startCaretPosition);
-      var currentCaretPosition = regex.lastIndex;
+      
+      
+      var currentCaretPosition = index;
+      
       //console.log('currentCaretPosition = '+currentCaretPosition);
 
       var start = currentMessage.substr(0, startCaretPosition);
+      
       //console.log('start = '+start);
+      
       var end = currentMessage.substr(currentCaretPosition, currentMessage.length);
+      
       //console.log('end = '+end);
+      
       var startEndIndex = (start + mention.value).length + 1;
+      
       //console.log('startEndIndex = '+startEndIndex);
 
       mentionsCollection.push(mention);
@@ -219,6 +237,8 @@
       //hideAutoComplete();
 
       var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
+        //console.log('inputBuffer : '+inputBuffer);
+        //console.log('triggerCharIndex : '+triggerCharIndex);
       if (triggerCharIndex > -1) {        
         currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
         if(currentDataQuery.lastIndexOf(' ') != -1){
@@ -364,6 +384,7 @@
     }
 
     function doSearch(query) {
+      //console.log('doSearch : '+query);
       if (query && query.length && query.length >= settings.minChars) {
         settings.onDataRequest.call(this, 'search', query, function (responseData) {
           populateDropdown(query, responseData);
