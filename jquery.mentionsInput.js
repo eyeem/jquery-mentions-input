@@ -164,15 +164,16 @@
         index = regex.lastIndex;
       }
       
-      //console.log('regex  :' +regex);
-      //console.log('index  :' +index);
+/*
+      console.log('regex  :' +regex);
+      console.log('index  :' +index);
+*/
 
       var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
       startCaretPosition = index - currentDataQuery.length - 1;
 
       
       //startCaretPosition = inputBuffer.lastIndexOf(settings.triggerChar);
-      //console.log('regex.lastIndex = '+regex.lastIndex);
       //console.log('currentDataQuery.length = '+currentDataQuery.length);
       //console.log('startCaretPosition = '+startCaretPosition);
       
@@ -239,15 +240,27 @@
       var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
         //console.log('inputBuffer : '+inputBuffer);
         //console.log('triggerCharIndex : '+triggerCharIndex);
-      if (triggerCharIndex > -1) {        
+      if (triggerCharIndex > -1) {    
+        //console.log('noooo1');    
         currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
         if(currentDataQuery.lastIndexOf(' ') != -1){
           hideAutoComplete();
         } else {
           currentDataQuery = utils.rtrim(currentDataQuery);
-          if(triggerCharIndex == 0 || $('.viewport.active #comment-form_comment').val().charAt(triggerCharIndex - 1) == " " ){
+          //console.log('if?');
+          if(triggerCharIndex == 0 || inputBuffer[triggerCharIndex - 1] == " " ){
+          //console.log('defer');
             _.defer(_.bind(doSearch, this, currentDataQuery));          
-          }        
+          }    
+          else {
+/*
+            console.log('noooo1');
+            console.log('inputBuffer : '+inputBuffer);
+            console.log('pos : '+triggerCharIndex);
+            console.log('val : '+$('.viewport.active #comment-form_comment').val());
+            console.log('char before : '+inputBuffer[triggerCharIndex - 1]);
+*/
+          }    
         }
       } else {
         hideAutoComplete();
