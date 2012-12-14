@@ -153,7 +153,7 @@
       //console.log('addMention in');
       var currentMessage = getInputBoxValue();
       
-      //console.log('currentMessage = '+currentMessage);
+     // console.log('currentMessage = '+currentMessage);
 
       // Using a regex to figure out positions
       var regex = new RegExp("\\" + settings.triggerChar + currentDataQuery, "gi");
@@ -164,10 +164,8 @@
         index = regex.lastIndex;
       }
       
-/*
-      console.log('regex  :' +regex);
-      console.log('index  :' +index);
-*/
+      //console.log('regex  :' +regex);
+     // console.log('index  :' +index);
 
       var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
       startCaretPosition = index - currentDataQuery.length - 1;
@@ -233,13 +231,14 @@
     }
 
     function onInputBoxInput(e) {
+     // console.log('onInputBoxInput');
       updateValues();
       updateMentionsCollection();
       //hideAutoComplete();
 
       var triggerCharIndex = inputBuffer.lastIndexOf(settings.triggerChar);
-        //console.log('inputBuffer : '+inputBuffer);
-        //console.log('triggerCharIndex : '+triggerCharIndex);
+       // console.log('inputBuffer : '+inputBuffer);
+       // console.log('triggerCharIndex : '+triggerCharIndex);
       if (triggerCharIndex > -1) {    
         //console.log('noooo1');    
         currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
@@ -247,19 +246,17 @@
           hideAutoComplete();
         } else {
           currentDataQuery = utils.rtrim(currentDataQuery);
-          //console.log('if?');
-          if(triggerCharIndex == 0 || inputBuffer[triggerCharIndex - 1] == " " ){
+         // console.log('if?');
+          if(triggerCharIndex == 0 || inputBuffer[triggerCharIndex - 1].trim() == "" ){
           //console.log('defer');
             _.defer(_.bind(doSearch, this, currentDataQuery));          
           }    
           else {
-/*
-            console.log('noooo1');
-            console.log('inputBuffer : '+inputBuffer);
-            console.log('pos : '+triggerCharIndex);
-            console.log('val : '+$('.viewport.active #comment-form_comment').val());
-            console.log('char before : '+inputBuffer[triggerCharIndex - 1]);
-*/
+           // console.log('noooo1');
+           // console.log('inputBuffer : '+inputBuffer);
+           // console.log('pos : '+triggerCharIndex);
+           // console.log('val : '+$('.viewport.active #comment-form_comment').val());
+           // console.log('char before : "'+inputBuffer[triggerCharIndex - 1]+'"');
           }    
         }
       } else {
